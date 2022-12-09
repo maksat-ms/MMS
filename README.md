@@ -1,5 +1,2 @@
 # MMS
-MMS
-qwerqwe
-qwer
-qwerqwer
+my Utils
