@@ -23,8 +23,10 @@ public class Main {
         orcl.read(conn, "select C_NAME from Z#CLIENT where rownum < 10");
     }
 
-    public static void TestPostgre() {
-        Postgre.test();
+    public static void TestPostgre() throws SQLException {
+        Postgre postgre = new Postgre();
+        Connection conn = postgre.GetConnection();
+        postgre.read(conn, "select fio from fio_list");
     }
 
     public static void TestClearPKG() throws IOException {

@@ -8,44 +8,35 @@ public class Postgre {
     static final String USER = "postgres";
     static final String PASS = "sysdba";
 
-    public static void test() {
-
-        System.out.println("Testing connection to PostgreSQL JDBC");
+    public Connection GetConnection() {
 
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
-            return;
+            return null;
         }
 
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
         Connection connection = null;
 
         try {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            read(connection, "select fio from fio_list");
-
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
-            return;
+            return null;
         }
 
-        if (connection != null) {
-            System.out.println("You successfully connected to database now");
-        } else {
-            System.out.println("Failed to make connection to database");
-        }
+        return connection;
     }
 
-    public static void read(Connection conn, String sql) throws SQLException
+    public void read(Connection connection, String sql) throws SQLException
     {
         try
         {
-            Statement statement = conn.createStatement();
+
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 String str = resultSet.getString(1);
@@ -53,7 +44,7 @@ public class Postgre {
             }
         }
         finally{
-            conn.close();
+            connection.close();
         }
     }
 }
