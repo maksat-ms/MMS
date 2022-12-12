@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            TestClearPKG();
+            TestPostgre();
         }
         catch (Exception e)
         {
@@ -21,6 +21,10 @@ public class Main {
         Orcl orcl = new Orcl();
         Connection conn = orcl.getConnection("jdbc:oracle:thin:@172.22.25.97:1521:akblast", "ibs", "1239870");
         orcl.read(conn, "select C_NAME from Z#CLIENT where rownum < 10");
+    }
+
+    public static void TestPostgre() {
+        Postgre.test();
     }
 
     public static void TestClearPKG() throws IOException {
